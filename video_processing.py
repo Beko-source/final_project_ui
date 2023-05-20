@@ -21,7 +21,7 @@ Vpath = os.path.dirname(os.path.abspath(__file__))
 
 
 
-color_classifier = torch.load(rf"{Vpath}\colour_model.pt")
+color_classifier = torch.load(rf"{Vpath}\colour model.pt")
 color_classifier = color_classifier.cuda()
 color_classifier.eval()
 
@@ -44,7 +44,7 @@ class Detector:
         fps = cap.get(cv2.CAP_PROP_FPS)
         frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
+        
         ffmpeg_cmd = f"ffmpeg -y -f rawvideo -pix_fmt bgr24 -s {frame_width}x{frame_height} -r {fps} -i - -c:v libx264 -preset fast -crf 30 -pix_fmt nv12 -an -vcodec libx264 {output_path}"
 
         output_file = subprocess.Popen(ffmpeg_cmd.split(' '), stdin=subprocess.PIPE)
@@ -154,6 +154,3 @@ class Detector:
                 cv2.putText(frame,  body_name[body_mode_pred], (int(cx1), int(y2)), cv2.FONT_HERSHEY_SIMPLEX, 1, (203, 192, 255), 2)
                 self.clf_state = False
 
-if __name__ == "__main__":
-    car_detector = Detector()
-    car_detector.process_video(rf"vechiles.mp4",rf"vechiles_detected.mp4",rf"vechiles_detected.json")
