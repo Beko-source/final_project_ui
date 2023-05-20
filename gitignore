@@ -1,0 +1,11 @@
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Custom Files
+*.mp4
+*.json
+*.jpg
+*.pt
+
+# python's cache
+/__pycache__
